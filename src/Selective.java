@@ -11,9 +11,9 @@ import org.cloudbus.cloudsim.core.CloudSim;
 
 /**
  * FCFS Task scheduling
- * 
+ * @author Linda J
  */
-public class EnhancedMaxMin {
+public class Selective {
 
 	/** The cloudlet list. */
 	private static List<Cloudlet> cloudletList;
@@ -29,7 +29,7 @@ public class EnhancedMaxMin {
 	 */
 	public static void main(String[] args) {
 
-		Log.printLine("Starting Max-Min...");
+		Log.printLine("Starting Selective Algorithm...");
 
 	        try {
 	        	// First step: Initialize the CloudSim package. It should be called
@@ -47,13 +47,10 @@ public class EnhancedMaxMin {
 					Datacenter datacenter0 = createDatacenter("Datacenter_0");
 
 	            	//Third step: Create Broker
-	            	EnhancedMaxMinBroker broker = createBroker();
+	            	SelectiveBroker broker = createBroker();
 	            	int brokerId = broker.getId();
 
 	            	//Fourth step: Create one virtual machine
-	            	//vmlist = new VmsCreator().createRequiredVms(reqVms, brokerId);
-	            	
-	            	//Max-min outperform min-min
 	            	vmlist = new VmsCreator().createRequiredVms(reqVms, brokerId);
 
 
@@ -62,13 +59,7 @@ public class EnhancedMaxMin {
 
 
 	            	//Fifth step: Create two Cloudlets
-	            	//cloudletList = new CloudletCreator().createUserCloudlet(reqTasks, brokerId);
-	            	
-	            	//Max-min outperform min-min
-	            	cloudletList = new CloudletCreator2().createUserCloudlet(reqTasks, brokerId);
-	            	
-	            	//Min-min outperform max-min
-	            	//cloudletList = new CloudletCreator2().createUserCloudlet(reqTasks, brokerId);
+	            	cloudletList = new CloudletCreator().createUserCloudlet(reqTasks, brokerId);
       	
 	            	//submit cloudlet list to the broker
 	            	broker.submitCloudletList(cloudletList);
@@ -89,7 +80,7 @@ public class EnhancedMaxMin {
 
 	            	printCloudletList(newList);
 
-	            	Log.printLine("EnhancedMaxMin finished!");
+	            	Log.printLine("Selective Algorithm finished!");
 	        }
 	        catch (Exception e) {
 	            e.printStackTrace();
@@ -106,11 +97,11 @@ public class EnhancedMaxMin {
 
 	    //We strongly encourage users to develop their own broker policies, to submit vms and cloudlets according
 	    //to the specific rules of the simulated scenario
-	    private static EnhancedMaxMinBroker createBroker(){
+	    private static SelectiveBroker createBroker(){
 
-	    	EnhancedMaxMinBroker broker = null;
+	    	SelectiveBroker broker = null;
 	        try {
-			broker = new EnhancedMaxMinBroker("Broker");
+			broker = new SelectiveBroker("Broker");
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;

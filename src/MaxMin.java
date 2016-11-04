@@ -68,7 +68,7 @@ public class MaxMin {
 
 
 	            	//Fifth step: Create two Cloudlets
-	            	cloudletList = new CloudletCreator2().createUserCloudlet(reqTasks, brokerId);
+	            	cloudletList = new CloudletCreator3().createUserCloudlet(reqTasks, brokerId);
       	
 	            	//submit cloudlet list to the broker
 	            	broker.submitCloudletList(cloudletList);

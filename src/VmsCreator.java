@@ -20,7 +20,7 @@ public class VmsCreator {
     	//VM description
     	int vmid = 0;
     	//int mips = 1000;
-    	int[] mips={450, 200, 300, 220};
+    	int[] mips={220, 200, 300, 450};
     	long size = 1000; //image size (MB)
     	int ram = 512; //vm memory (MB)
     	long bw = 1000;

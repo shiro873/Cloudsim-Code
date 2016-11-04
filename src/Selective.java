@@ -9,10 +9,7 @@ import org.cloudbus.cloudsim.Vm;
 import org.cloudbus.cloudsim.core.CloudSim;
 
 
-/**
- * FCFS Task scheduling
- * @author Linda J
- */
+
 public class Selective {
 
 	/** The cloudlet list. */
@@ -23,6 +20,8 @@ public class Selective {
 
 	private static int reqTasks = 10;
 	private static int reqVms = 4;
+	
+	private static List<Flag> nameFlag;
 	
 	/**
 	 * Creates main() to run this example
@@ -67,6 +66,8 @@ public class Selective {
     	
 	            	//call the scheduling function via the broker
 	            	broker.scheduleTaskstoVms();
+	            	
+	            	
    	
             	
 	            	// Sixth step: Starts the simulation
@@ -75,10 +76,12 @@ public class Selective {
 
 	            	// Final step: Print results when simulation is over
 	            	List<Cloudlet> newList = broker.getCloudletReceivedList();
+	            	
+	            	nameFlag = broker.nameList;
 
 	            	CloudSim.stopSimulation();
 
-	            	printCloudletList(newList);
+	            	printCloudletList(newList, nameFlag);
 
 	            	Log.printLine("Selective Algorithm finished!");
 	        }
@@ -113,7 +116,7 @@ public class Selective {
 	     * Prints the Cloudlet objects
 	     * @param list  list of Cloudlets
 	     */
-	    private static void printCloudletList(List<Cloudlet> list) {
+	    private static void printCloudletList(List<Cloudlet> list, List<Flag> flag) {
 	        int size = list.size();
 	        Cloudlet cloudlet;
 
@@ -121,7 +124,8 @@ public class Selective {
 	        Log.printLine();
 	        Log.printLine("========== OUTPUT ==========");
 	        Log.printLine("Cloudlet ID" + indent + "STATUS" + indent +
-	                "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" + indent + "Finish Time");
+	                "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" +
+	        		indent + "Finish Time" + indent + "Algo");
 
 	        DecimalFormat dft = new DecimalFormat("###.##");
 	        for (int i = 0; i < size; i++) {
@@ -131,9 +135,12 @@ public class Selective {
 	            if (cloudlet.getCloudletStatus() == Cloudlet.SUCCESS){
 	                Log.print("SUCCESS");
 
-	            	Log.printLine( indent + indent + cloudlet.getResourceId() + indent + indent + indent + cloudlet.getVmId() +
-	                     indent + indent + dft.format(cloudlet.getActualCPUTime()) + indent + indent + dft.format(cloudlet.getExecStartTime())+
-                             indent + indent + dft.format(cloudlet.getFinishTime()));
+	            	Log.printLine( indent + indent + cloudlet.getResourceId() + indent +
+	            		 indent + indent + cloudlet.getVmId() +
+	                     indent + indent + dft.format(cloudlet.getActualCPUTime()) +
+	                     indent + indent + dft.format(cloudlet.getExecStartTime())+
+                         indent + indent + dft.format(cloudlet.getFinishTime())+
+                         indent + indent + flag.get(i).name);
 	            }
 	        }
 

@@ -69,7 +69,7 @@ public class MinminBroker extends DatacenterBroker {
 			
 			for(int i=0;i<clist.size();i++){
 				for(int j=0;j<(vlist.size()-1);j++){
-					if(completionTime[i][j+1] > completionTime[i][j] && completionTime[i][j+1] > -1.0){
+					if(completionTime[i][j+1] > completionTime[i][j] && completionTime[i][j+1] > 0.0){
 						minCloudlet=i;
 					}
 				}
@@ -78,6 +78,9 @@ public class MinminBroker extends DatacenterBroker {
 			
 				for(int j=0; j<vlist.size(); j++){
 					time = getExecTime(clist.get(minCloudlet), vlist.get(j));
+					if(j==0){
+						min=time;
+					}
 					if(time < min && time > -1.0){
 						minVm=j;
 						min=time;

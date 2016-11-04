@@ -65,7 +65,7 @@ public class EnhancedMaxMin {
 	            	//cloudletList = new CloudletCreator().createUserCloudlet(reqTasks, brokerId);
 	            	
 	            	//Max-min outperform min-min
-	            	cloudletList = new CloudletCreator2().createUserCloudlet(reqTasks, brokerId);
+	            	cloudletList = new CloudletCreator3().createUserCloudlet(reqTasks, brokerId);
 	            	
 	            	//Min-min outperform max-min
 	            	//cloudletList = new CloudletCreator2().createUserCloudlet(reqTasks, brokerId);
